@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { MenuService } from './menu.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateMenuDTO, UpdateMenuDTO } from './menu.dto';
@@ -12,7 +20,7 @@ export class MenuController {
   @Get()
   @ApiOperation({ description: 'Get all menus' })
   @ApiResponse({ status: 200, description: 'List of menus is sent' })
-  async getAllMenu():Promise<Menu[]> {
+  async getAllMenu(): Promise<Menu[]> {
     return await this.menuService.getAllMenu();
   }
 
@@ -20,17 +28,16 @@ export class MenuController {
   @ApiOperation({ description: 'Get menu by id' })
   @ApiResponse({ status: 200, description: 'Menu is sent' })
   @ApiResponse({ status: 404, description: 'Menu not found' })
-  async getMenuById(@Param('id') id: string) : Promise<Menu> {
+  async getMenuById(@Param('id') id: string): Promise<Menu> {
     return await this.menuService.getMenuById(id);
   }
-  
+
   @Post()
   @ApiOperation({ description: 'Create user' })
   @ApiResponse({ status: 201, description: 'Menu is created' })
-  async createMenu(@Body() dto: CreateMenuDTO) : Promise<Menu> {
+  async createMenu(@Body() dto: CreateMenuDTO): Promise<Menu> {
     return this.menuService.createMenu(dto);
   }
-
 
   @Put('/:id')
   @ApiOperation({ description: 'Update menu by id' })

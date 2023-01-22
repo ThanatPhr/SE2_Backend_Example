@@ -17,31 +17,30 @@ export class MenuService {
 
   async getMenuById(id: string): Promise<Menu> {
     const menu = await this.menuRepository.findOneBy({ id });
-    if(!menu) {
+    if (!menu) {
       throw new HttpException('Menu not found', 404);
     }
-    return menu
+    return menu;
   }
 
-  async createMenu(dto:CreateMenuDTO) : Promise<Menu> {
-    const menu = this.menuRepository.create(dto)
-    await this.menuRepository.save(menu)
-    return menu
+  async createMenu(dto: CreateMenuDTO): Promise<Menu> {
+    const menu = this.menuRepository.create(dto);
+    await this.menuRepository.save(menu);
+    return menu;
   }
 
-  async updateMenu(id: string, dto: UpdateMenuDTO) : Promise<Menu>{
+  async updateMenu(id: string, dto: UpdateMenuDTO): Promise<Menu> {
     const menu = await this.menuRepository.findOneBy({ id });
     if (!menu) {
       throw new HttpException('Menu not found', 404);
     }
     const updatedMenu = await this.menuRepository.update(id, dto);
     return updatedMenu.raw;
-    
   }
 
   async removeMenuById(id: string): Promise<void> {
     const deletedMenu = await this.menuRepository.delete(id);
-    if(!deletedMenu.affected) {
+    if (!deletedMenu.affected) {
       throw new HttpException('Menu not found', 404);
     }
   }

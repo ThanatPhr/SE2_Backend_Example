@@ -1,9 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Menu {
-  @PrimaryGeneratedColumn("uuid")
-  id: string
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
@@ -19,7 +19,7 @@ export class Menu {
 }
 
 export enum FoodType {
-  THAI = "thai",
-  JAPAN = "japan",
-  INTER = "inter"
+  THAI = 'thai',
+  JAPAN = 'japan',
+  INTER = 'inter',
 }
