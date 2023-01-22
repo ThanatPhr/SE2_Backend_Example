@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Menu } from './menu.entity';
 import { Repository } from 'typeorm';
@@ -18,7 +18,7 @@ export class MenuService {
   async getMenuById(id: string): Promise<Menu> {
     const menu = await this.menuRepository.findOneBy({ id });
     if (!menu) {
-      throw new HttpException('Menu not found', 404);
+      throw new HttpException('Menu not found', HttpStatus.NOT_FOUND);
     }
     return menu;
   }
@@ -32,7 +32,7 @@ export class MenuService {
   async updateMenu(id: string, dto: UpdateMenuDTO): Promise<Menu> {
     const menu = await this.menuRepository.findOneBy({ id });
     if (!menu) {
-      throw new HttpException('Menu not found', 404);
+      throw new HttpException('Menu not found', HttpStatus.NOT_FOUND);
     }
     const updatedMenu = await this.menuRepository.update(id, dto);
     return updatedMenu.raw;
@@ -41,7 +41,7 @@ export class MenuService {
   async removeMenuById(id: string): Promise<void> {
     const deletedMenu = await this.menuRepository.delete(id);
     if (!deletedMenu.affected) {
-      throw new HttpException('Menu not found', 404);
+      throw new HttpException('Menu not found', HttpStatus.NOT_FOUND);
     }
   }
 }
